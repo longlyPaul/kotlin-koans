@@ -1,9 +1,21 @@
 package iv_properties
 
 import util.TODO
+import java.util.*
+import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 class LazyProperty(val initializer: () -> Int) {
-    val lazy: Int = todoTask33()
+    val lazy: Int? = null
+    get() {
+        if (field == null) field = initializer()
+        return field
+    }
+}
+
+class ObserverProperty{
+    var ob:String by Delegates.observable("NUlL") { p,o, arg -> println("$o -> $arg") }
+
 }
 
 fun todoTask33(): Nothing = TODO(
@@ -17,3 +29,10 @@ fun todoTask33(): Nothing = TODO(
     """,
     references = { LazyProperty({ 42 }).lazy }
 )
+
+fun main(args: Array<String>) {
+    var observerProperty = ObserverProperty()
+    observerProperty.ob = "12"
+    observerProperty.ob = "yes"
+    observerProperty.ob = "yes2"
+}

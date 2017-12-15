@@ -9,7 +9,8 @@ fun todoTask38(): Nothing = TODO(
 )
 
 fun <T> T.myApply(f: T.() -> Unit): T {
-    todoTask38()
+    f()
+    return this
 }
 
 fun buildString(): String {
@@ -22,7 +23,7 @@ fun buildString(): String {
 }
 
 fun buildMap(): Map<Int, String> {
-    return hashMapOf<Int, String>().myApply {
+    return HashMap<Int, String>().myApply {
         put(0, "0")
         for (i in 1..10) {
             put(i, "$i")

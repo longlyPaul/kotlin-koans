@@ -1,5 +1,7 @@
 package ii_collections
 
+import com.google.common.collect.Sets
+
 fun example9() {
     val result = listOf(1, 2, 3, 4).fold(1, { partResult, element -> element * partResult })
     result == 24
@@ -14,8 +16,9 @@ fun whatFoldDoes(): Int {
 
 fun Shop.getSetOfProductsOrderedByEveryCustomer(): Set<Product> {
     // Return the set of products ordered by every customer
+    val result = Sets.newHashSet<Product>()
     return customers.fold(allOrderedProducts, {
         orderedByAll, customer ->
-        todoCollectionTask()
+        orderedByAll.filter { customer.orderedProducts.contains(it) }.toSet()
     })
 }
